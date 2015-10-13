@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                       http://www.springframework.org/schema/beans/spring-beans.xsd
+                       http://www.springframework.org/schema/security
+                       http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+	<!-- <security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" 
+		/> -->
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/app/login"
+			access="permitAll" />
+			
+		<security:intercept-url pattern="/app/signup/create"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/app/admin"
+			access="hasRole('ROLE_ADMIN') and over18" />
+
+		<security:intercept-url pattern="/app/**"
+			access="hasRole('ROLE_USER')" />
+
+		<security:form-login login-page="/app/login"
+			default-target-url="/app/base/" always-use-default-target="true"
+			authentication-failure-url="/app/login?error=true" />
+
+		<security:logout delete-cookies="JSESSIONID"
+			logout-success-url="/app/logout" />
+
+		<security:access-denied-handler
+			error-page="/app/User/error/403" />
+
+		<security:expression-handler ref="expressionHandler" />
+	</security:http>
+
+
+	<bean id="daoAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="userDetailsService"></property>
+	</bean>
+
+	<bean class="org.springframework.security.authentication.ProviderManager">
+		<constructor-arg>
+			<list>
+				<ref bean="daoAuthenticationProvider" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+
+	<security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="userDetailsService">
+			<security:password-encoder hash="md5"></security:password-encoder>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<!-- <security:authentication-manager> <security:authentication-provider> 
+		<security:user-service> <security:user name="pallav" password="jha" authorities="ROLE_USER" 
+		/> </security:user-service> </security:authentication-provider> </security:authentication-manager> -->
+
+	<!-- <security:authentication-manager> <security:authentication-provider> 
+		<security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select 
+		username, password,active from user where username=?" authorities-by-username-query="select 
+		username, authority from event_db.user u inner join event_db.role r on u.id= 
+		r.user_id where username = ?" /> </security:authentication-provider> </security:authentication-manager> -->
+</beans>

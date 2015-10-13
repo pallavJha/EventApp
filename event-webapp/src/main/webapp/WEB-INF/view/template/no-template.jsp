@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -14,12 +15,14 @@
 	src="${pageContext.request.contextPath}/static-resources/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/static-resources/js/main.js"></script>
+<script
+	src="${pageContext.request.contextPath}/static-resources/notify/notify.min.js"></script>
 
 <style>
 </style>
 </head>
 <body>
-	<div class="container top-buffer-header">
+	<div class="container top-buffer">
 		<tiles:insertAttribute name="body" />
 	</div>
 	

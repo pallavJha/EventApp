@@ -40,7 +40,7 @@ public class BaseController {
 	@PersistenceContext
 	EntityManager em;
 
-	@RequestMapping("/")
+	@RequestMapping()
 	public String testCall() {
 		return "index";
 	}

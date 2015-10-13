@@ -5,13 +5,13 @@
 <tiles-definitions>
 
 	<definition name="noTemplate" template="/WEB-INF/view/template/no-template.jsp">
-		<put-attribute name="title" value="WOW-Login" />
+		<put-attribute name="title" value="" />
 		<put-attribute name="header" value="" />
 		<put-attribute name="menu" value="" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/view/template/footer.jsp" />
 	</definition>
-	
+
 	<definition name="DefaultTemplate" template="/WEB-INF/view/template/site-template.jsp">
 		<put-attribute name="title" value="WOW" />
 		<put-attribute name="header" value="/WEB-INF/view/template/header.jsp" />
@@ -32,10 +32,20 @@
 		<put-attribute name="title" value="Wow Search" />
 		<put-attribute name="body" value="/WEB-INF/view/search-page.jsp" />
 	</definition>
-	
+
 	<definition name="login-form" extends="noTemplate">
 		<put-attribute name="title" value="Login" />
 		<put-attribute name="body" value="/WEB-INF/view/login_form.jsp" />
+	</definition>
+
+	<definition name="adminPage" extends="DefaultTemplate">
+		<put-attribute name="title" value="Admin" />
+		<put-attribute name="body" value="/WEB-INF/view/admin-page.jsp" />
+	</definition>
+
+	<definition name="error403" extends="DefaultTemplate">
+		<put-attribute name="title" value="Error 403" />
+		<put-attribute name="body" value="/WEB-INF/view/error403.jsp" />
 	</definition>
 
 </tiles-definitions>

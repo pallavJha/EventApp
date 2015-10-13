@@ -5,6 +5,8 @@
 <div class="form_div top-buffer row" align="center">
 	<div class="col-md-12">
 		<form class="form-horizontal" role="form" id="student-form">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
 			<div class="form-group row">
 				<div class=' col-sm-offset-3 col-sm-1 '>
 					<label class="control-label " for="email">Name:</label>
@@ -92,6 +94,14 @@
 				$(".do-remove").each(function() {
 					$(this).remove();
 				});
+				$.notify("Student Added!", "success");
+				setTimeout(function(){
+					location.reload();	
+				}, 1500);
+				
+			},
+			error:function(){
+				$.notify("Error!", "error");
 			}
 		});
 	});
@@ -120,6 +130,7 @@
 											$("#table-body").append(row);
 										}
 										$(".table-div").show();
+										$.notify("Table created!", "info");
 									}
 								});
 					});

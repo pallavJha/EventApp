@@ -1,11 +1,14 @@
 package pl.event.base;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-public class Base {
+import org.hibernate.annotations.DiscriminatorOptions;
+
+@DiscriminatorOptions(force = true)
+@MappedSuperclass
+public abstract class Base {
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -27,5 +30,4 @@ public class Base {
 	public void setTermName(String termName) {
 		this.termName = termName;
 	}
-
 }

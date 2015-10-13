@@ -134,11 +134,6 @@ public class DaoImpl implements Dao {
 				"%" + value + "%");
 		criteria.add(valuePredicate);
 
-		// approvedPredicate = criteriaBuilder.equal(fromClause.<Integer>
-		// get("masterLifeCycleData.approvalStatus"),
-		// Integer.valueOf(0));
-		// criteria.add(approvedPredicate);
-
 		Predicate[] predicates = new Predicate[criteria.size()];
 		criteria.toArray(predicates);
 		criteriaQuery.where(predicates);
@@ -173,6 +168,12 @@ public class DaoImpl implements Dao {
 	public boolean baseExists() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public <T extends Base> List<T> executeQuery(Class clazz, String query) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

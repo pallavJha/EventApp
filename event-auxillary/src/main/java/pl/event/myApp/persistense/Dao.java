@@ -91,6 +91,8 @@ public interface Dao {
 	boolean baseExists();
 
 	public Session getSession();
+
+	public <T extends Base> List<T> executeQuery(Class clazz, String query);
 	/*
 	 * 
 	 * 
